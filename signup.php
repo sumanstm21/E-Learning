@@ -1,29 +1,48 @@
 <?php
-include('index.php');
+include_once('connection.php');
+session_start();
 
-if(isset($_POST['username'])){
-    // echo 'posted';
-$sql = "INSERT INTO login (`user_name`, `password`) VALUES ('".$_POST['username']."', '".$_POST['password']."')";
-
-if ($conn->query($sql) === TRUE) {
-    echo "New record created successfully";
-} else {
-    // echo "Error: " . $sql . "<br>" . $conn->error;
-    echo "Username : ".$_POST['username']." already exits. ";
-}
-
-$conn->close();
-}
-?>
-
-<form method="POST" action="signup.php">
-  <div class="form-row">
+$content = '
+<form method="POST" action="signup.php" enctype="multipart/form-data">
+  <div class="form">
     <div class="col-3">
-      <input type="text" name="username" class="form-control" placeholder="Username">
+      Full Name : <input type="text" name="full_name" class="form-control" placeholder="Full Name"><br/>
     </div>
     <div class="col-3">
-      <input type="text" name="password" class="form-control" placeholder="Password">
+      Email : <input type="email" name="email" class="form-control" placeholder="Email Address"><br/>
     </div>
+    <div class="col-3">
+      Password : <input type="password" name="password" class="form-control" placeholder="Password"><br/>
+    </div>
+    <div>
+  	  <input type="file" name="avatar_image"><br/>
+  	</div>
   </div>
   <button type="submit" class="btn btn-primary">Submit</button>
 </form>
+';
+
+if(isset($_POST['email'])){
+  $image = $_FILES['avatar_image']['name'];
+  $target = "images/".basename($image);
+  // echo 'posted';
+  $sql = "INSERT INTO users (`full_name`, `email`, `password`, `avatar_image`) VALUES ('".$_POST['full_name']."', '".$_POST['email']."', '".$_POST['password']."', '".$image."')";
+  
+  if (move_uploaded_file($_FILES['avatar_image']['tmp_name'], $target)) {
+    $content = "Image uploaded successfully";
+  }else{
+    $content = "Failed to upload image";
+  }
+  
+  if ($conn->query($sql) === TRUE) {
+    $content =  "New record created successfully";
+  } else {
+    // echo "Error: " . $sql . "<br>" . $conn->error;
+    $content =  "Email : ".$_POST['email']." already exits. ";
+  }
+  
+  $conn->close();
+}
+include('masterpage.php');
+?>
+

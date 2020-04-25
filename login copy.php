@@ -9,20 +9,19 @@ include_once('connection.php');
 
     $content = '
         <form action="login.php" method="POST">
-            <input name="email" type="email" placeholder="email">
+            <input name="username" type="text" placeholder="username">
             <input name="password" type="password" placeholder="password">
             <button>LOGIN</button>
         </form>
         ';
 
-    if(isset($_POST['email'])){
-        $sql = "SELECT * FROM users";
-        $users = $conn->query($sql);
+    if(isset($_POST['username'])){
+        $sql = "SELECT * FROM login";
+        $result = $conn->query($sql);
 
-        foreach($users as $user){
-            if($user['email'] == $_POST['email'] && $user['password'] == $_POST['password']){
-                $_SESSION['username'] = $user['full_name'];
-                $_SESSION['email'] = $user['email'];
+        foreach($result as $user){
+            if($user['user_name'] == $_POST['username'] && $user['password'] == $_POST['password']){
+                $_SESSION['username'] = $user['user_name'];
                 // echo 'logged in';
                 header('Location: profile.php');
                 $conn->close();
