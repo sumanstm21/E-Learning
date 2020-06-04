@@ -5,23 +5,11 @@ $password = "";
 $dbname = "e_learning";
 
 try {
-        $conn = new mysqli($servername, $username, $password, $dbname);
-        // Check connection
-        if ($conn->connect_error) {
-            die("Connection failed: " . $conn->connect_error);
-        }
-
-        $sql = "SELECT * FROM homepage";
-        $result = $conn->query($sql);
-
-        if ($result->num_rows > 0) {
-            // output data of each row
-            while($row = $result->fetch_assoc()) {
-            //  echo $row["homepage"];
-            }
-        } else {
-            echo "0 results";
-        }
+    session_start();
+    // $con = mysql_connect("localhost","root","") or die(mysql_error());
+    $con = mysqli_connect("localhost","root","") or die(mysqli_error());
+    // $db = mysqli_select_db("fifanews",$con) or die(mysqli_error());
+    $db = mysqli_select_db($con, $dbname) or die(mysqli_error());
     
     }
 catch(PDOException $e)
