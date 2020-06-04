@@ -14,6 +14,8 @@ $sql ="select * from course order by course_id";
 $courses = mysqli_query($con,$sql);
 if(isset($_SESSION['user_id'])){
     $userid = $_SESSION['user_id'];
+  } else {
+    $userid = 0;      
   }
   $sqlr=" select * from user_favourite where user_id='$userid'";
   $r=mysqli_query($con,$sqlr);
@@ -41,7 +43,9 @@ if(isset($_SESSION['user_id'])){
                 }
             }
         
-
+if($userid == 0){
+    echo 'Please Log In to Add Lessons to your Favourite list';
+}
 
 ?>
 </tbody>
