@@ -1,4 +1,5 @@
-<?php require_once('nav.php'); ?>
+<?php
+require_once('nav.php'); ?>
 <main>
 <div class="d-flex flex-column justify-content-between mt-6">
     <h1 class="text-center">Your Courses</h1>
@@ -11,7 +12,7 @@
         <!--single container-->
         <?php
           $sql ="select * from course order by course_id limit 3";
-          $courses = mysqli_query($con,$sql);
+          $courses = mysqli_query($con,$sql) or die("Error: " . mysqli_error($con));
 
           while($row = mysqli_fetch_array($courses)){
         ?>

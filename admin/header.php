@@ -32,7 +32,7 @@
 
                 <?php if(isset($_SESSION['email'])){ ?>
                 <ul class="list-unstyled components">
-                    <p>Dummy Heading</p>
+                    <p>CMS</p>
                     <li class="active">
                         <a href="#homeSubmenu" data-toggle="collapse" aria-expanded="false">Home</a>
                         <ul class="collapse list-unstyled" id="homeSubmenu">
@@ -42,7 +42,7 @@
                         </ul>
                     </li>
                     <li>
-                        <a href="about.php">About</a>
+                        <a href="emails.php">Emails</a>
                         <a href="#pageSubmenu" data-toggle="collapse" aria-expanded="false">Pages</a>
                         <ul class="collapse list-unstyled" id="pageSubmenu">
                             <li><a href="#">Page 1</a></li>

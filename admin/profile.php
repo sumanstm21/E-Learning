@@ -16,7 +16,6 @@ foreach($users as $user){
         $content = "
         <h2>Name :  $fullname</h2>
         <h3>Email : $email</h3>
-        <img src='images/$image'>
         ";
     }
 }

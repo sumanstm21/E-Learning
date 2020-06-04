@@ -21,8 +21,10 @@ ob_start();
             <!--Overview of lessons and topics-->
             <div id="overview">
             <?php 
-              $userid = $_SESSION['user_id'];
-
+              $userid = 1;
+              if(isset($_SESSION['user_id'])){
+                $userid = $_SESSION['user_id'];
+              }
               $sqlr=" select * from user_favourite where user_id='$userid'";
               $r=mysqli_query($con,$sqlr);
               $found = 0;

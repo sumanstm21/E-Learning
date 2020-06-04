@@ -14,13 +14,17 @@
         foreach($users as $user){
             if($user['email'] == $_POST['email'] && $user['password'] == $_POST['password']){
                 // $_SESSION['user_id'] = $user['full_name'];
+                if($user['status'] == 'Admin'){
                 $_SESSION['user_id'] = $user['user_id'];
                 $_SESSION['email'] = $user['email'];
                 // echo 'logged in';
                 header('Location: profile.php');
                 $conn->close();
+                } else{
+                    echo 'Sorry Only User with Administration status can be logged in.';
+                }
             } else {
-                echo "0 results";
+                // echo "0 results";
                 $content = 'error username or password';
             }
         }
